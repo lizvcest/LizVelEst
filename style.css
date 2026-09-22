@@ -1,0 +1,46 @@
+/* Fondo, letra y espacio alrededor del contenido */
+body {
+  background-color: #fceef5;
+  color: #333333;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* Título principal */
+h1 {
+  color: #8c285b;
+  margin-bottom: 20px;
+}
+
+/* Subtítulos */
+h3 {
+  color: #8c285b;
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+
+/* Espacio entre los elementos de la lista */
+li {
+  margin-bottom: 8px;
+}
+
+/* Enlace con apariencia de botón */
+.boton-contacto {
+  display: inline-block;
+  background-color: #8c285b;
+  color: #ffffff;
+  padding: 12px 24px;
+  margin-top: 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Cambia de color al pasar el cursor */
+.boton-contacto:hover {
+  background-color: #651b41;
+}
