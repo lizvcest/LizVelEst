@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "DripDrop Alt Solid";
+  src: url("../assets-fonts/dripdrop-altsolid.woff2") format("woff2");
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+header {
+  padding: 40px 0;
+  background:
+    radial-gradient(circle at 10% 20%, #b2cbde, transparent 40%),
+    radial-gradient(circle at 90% 80%, #b2cbde, transparent 40%),
+    hsl(49, 30%, 90%);
+}
+
+#inicio {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "DripDrop Alt Solid";
+  font-size: 90px;
+  color: #464c4f;
+}
