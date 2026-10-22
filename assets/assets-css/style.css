@@ -1,13 +1,20 @@
+/* ========== BASE ========== */
+
+/* Font: DripDrop, used for titles */
 @font-face {
   font-family: "DripDrop Alt Solid";
   src: url("../assets-fonts/dripdrop-altsolid.woff2") format("woff2");
 }
 
+/* Page: removes the browser's default margin */
 body {
   margin: 0;
   min-height: 100vh;
 }
 
+/* ========== HEADER ========== */
+
+/* Header: background with blue blobs */
 header {
   padding: 40px 0;
   background:
@@ -16,6 +23,7 @@ header {
     hsl(49, 30%, 90%);
 }
 
+/* Home: hero title */
 #home {
   min-height: 100vh;
   display: flex;
@@ -26,21 +34,28 @@ header {
   color: #464c4f;
   text-transform: uppercase;
 }
+
+/* Home: white outline outside the letters */
 #home h1 {
   -webkit-text-stroke: 4px white;
   paint-order: stroke fill;
 }
 
-/* Nav and Nav Box Style */
+/* Nav: links layout */
 .nav-links {
   list-style: none;
   margin: 0;
-  padding: 15px 40px;
+  padding: 15px 80px;
   display: flex;
-  gap: 40px;
+  gap: 70px;
+}
+
+/* Glass style: shared by nav and About button */
+.nav-links,
+.about-button {
   border-radius: 999px;
   font-family: "DripDrop Alt Solid";
-  /* Liquid Glass Effect in Nav Box */
+  /* Liquid glass effect */
   background: rgba(187, 187, 188, 0.12);
   -webkit-backdrop-filter: blur(8px) saturate(150%);
   backdrop-filter: blur(8px) saturate(150%);
@@ -58,18 +73,30 @@ header {
     0 6px 16px 0 rgba(0, 0, 0, 0.08);
 }
 
+/* Nav: centers the pill */
 .navbar {
   display: flex;
   justify-content: center;
 }
 
-.nav-links a {
+/* Link text: nav and About button */
+.nav-links a,
+.about-button {
   text-decoration: none;
   color: #464c4f;
-  font-size: 20px;
+  font-size: 25px;
 }
 
-/* About Me Section */
+/* About button: size and position */
+.about-button {
+  align-self: flex-start;
+  padding: 15px 30px;
+  text-align: center;
+}
+
+/* ========== ABOUT ME ========== */
+
+/* Section: two-column layout and background */
 #about {
   display: flex;
   min-height: 100vh;
@@ -79,11 +106,13 @@ header {
     hsl(49, 30%, 90%);
 }
 
+/* Two equal columns */
 .about-title,
 .about-content {
   flex: 1;
 }
 
+/* Title column: title at the bottom, clips the blur layer */
 .about-title {
   position: relative;
   display: flex;
@@ -93,7 +122,7 @@ header {
   overflow: hidden;
 }
 
-/* About Me Title */
+/* Title column: vertical heading */
 .about-title h2 {
   font-family: "DripDrop Alt Solid";
   text-transform: uppercase;
@@ -101,24 +130,24 @@ header {
   font-size: 29vh;
   margin: 0;
   letter-spacing: 0.05em;
-  /* Vertical */
+  /* Vertical text, reads bottom to top */
   writing-mode: vertical-rl;
   transform: rotate(180deg);
 }
 
+/* Title column: blurred gradient layer */
 .about-title::before {
   content: "";
   position: absolute;
   inset: -50px;
-  /* Gradient */
   background:
     linear-gradient(to right, #b2cbde, transparent 60%),
-    linear-gradient(to left, #b2cbde, transparent 60%), 
-    hsl(49, 30%, 90%);
-  /* Effect */
+    linear-gradient(to left, #b2cbde, transparent 60%), hsl(49, 30%, 90%);
+  /* Blur softens the gradient */
   filter: blur(100px);
 }
 
+/* Title column: broken glass on top */
 .about-title::after {
   content: "";
   position: absolute;
@@ -129,21 +158,235 @@ header {
   opacity: 0.5;
   pointer-events: none;
 }
-/* About Me Content */
+
+/* Text column: star on top, paragraphs at the bottom */
 .about-content {
-  background: url("../assets-img/sparkle24.svg") 40% 10% / 70% no-repeat;
+  /* Decorative star */
+  background: url("../assets-img/sparkle24.svg") 60% 10% / 40% no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 50px;
 }
-/* About Me Paragraph */
+
+/* Text column: paragraphs */
 .about-content p {
-  font-family: "Marker Felt", cursive;  text-transform: uppercase;
+  font-family: "Marker Felt", cursive;
+  text-transform: uppercase;
   font-size: 20px;
   line-height: 1.3;
   color: #17191b;
   max-width: 60ch;
   hyphens: auto;
   margin: 0 0 1em;
+}
+
+/* ========== SKILLS ========== */
+
+/* Section: two-column layout and background */
+#skills {
+  display: flex;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 20%, #b2cbde, transparent 40%),
+    radial-gradient(circle at 90% 80%, #b2cbde, transparent 40%),
+    hsl(49, 30%, 90%);
+}
+
+/* Two equal columns */
+.skills-intro,
+.skills-folders {
+  flex: 1;
+}
+
+/* Left column: title and card */
+.skills-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 150px;
+  padding: 50px;
+}
+
+/* Left column: heading */
+.skills-intro h2 {
+  font-family: "DripDrop Alt Solid";
+  text-transform: uppercase;
+  color: #17191b;
+  font-size: 60px;
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+/* Card: white note */
+.skills-card {
+  font-family: "Marker Felt", cursive;
+  background: white;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 1/1;
+  padding: 40px;
+  box-sizing: border-box;
+  box-shadow: 15px 15px 0 #a8a8a8;
+  position: relative;
+}
+
+/* Card: tape on top */
+.skills-card::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  translate: -50%;
+  width: 60px;
+  height: 80px;
+  background: #dde3c6;
+  box-shadow: 4px 4px 0 #a8a8a8;
+}
+
+/* Right column: centers the folder stack */
+.skills-folders {
+  display: flex;
+  align-items: center;
+  padding: 50px;
+}
+
+/* Folder stack: keeps the proportions of the design (960 × 1080) */
+.folder-stack {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 960 / 1080;
+  /* Enables cqw units: 1cqw = 1% of the stack's width, so text scales with it */
+  container-type: inline-size;
+}
+
+/* Folder: PNG image placed inside the stack */
+.folder {
+  position: absolute;
+  background: center / contain no-repeat;
+  cursor: pointer;
+}
+
+/* Radio: hidden from view but still usable with the keyboard */
+.folder input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Folder: visible outline when reached with the Tab key */
+.folder:has(input:focus-visible) {
+  outline: 2px solid #17191b;
+  outline-offset: 4px;
+}
+
+/* Folder: tab label, centered on a point and rotated like its tab */
+.folder-tab {
+  position: absolute;
+  left: var(--tab-x);
+  top: var(--tab-y);
+  transform: translate(-50%, -50%) rotate(var(--tab-angle));
+  white-space: nowrap;
+  font-family: "DripDrop Alt Solid";
+  text-transform: uppercase;
+  font-size: 2.2cqw;
+  color: #17191b;
+}
+
+/* Folder: cover title on the front folder */
+.folder-cover {
+  position: absolute;
+  left: 48%;
+  top: 52%;
+  transform: translate(-50%, -50%) rotate(4deg);
+  width: 50%;
+  font-family: "DripDrop Alt Solid";
+  text-align: center;
+  text-transform: uppercase;
+  /* Splits the text into two even lines: SOME OF / MY SKILLS */
+  text-wrap: balance;
+  font-size: 9cqw;
+  line-height: 1.1;
+  color: #17191b;
+}
+
+/* Each folder: image, position, size and stacking order (001 in front).
+   aspect-ratio = the PNG's size in pixels, so the image is not distorted.
+   --tab-x, --tab-y and --tab-angle place the tab label (used in .folder-tab) */
+.folder-social {
+  background-image: url("../assets-img/folders/folder-social.png");
+  left: 1.9%;
+  top: 33.9%;
+  width: 83.2%;
+  aspect-ratio: 799 / 642;
+  z-index: 6;
+  --tab-x: 47.8%;
+  --tab-y: 6.9%;
+  --tab-angle: 5deg;
+}
+
+.folder-paid {
+  background-image: url("../assets-img/folders/folder-paid.png");
+  left: -1%;
+  top: 24.4%;
+  width: 88.5%;
+  aspect-ratio: 850 / 740;
+  z-index: 5;
+  --tab-x: 63.5%;
+  --tab-y: 8%;
+  --tab-angle: -17deg;
+}
+
+.folder-content {
+  background-image: url("../assets-img/folders/folder-content.png");
+  left: 2.1%;
+  top: 27.4%;
+  width: 80.4%;
+  aspect-ratio: 772 / 595;
+  z-index: 4;
+  --tab-x: 24.2%;
+  --tab-y: 6.9%;
+  --tab-angle: -3deg;
+}
+
+.folder-leads {
+  background-image: url("../assets-img/folders/folder-leads.png");
+  left: 5.5%;
+  top: 16.9%;
+  width: 83.3%;
+  aspect-ratio: 800 / 643;
+  z-index: 3;
+  --tab-x: 48.8%;
+  --tab-y: 7.2%;
+  --tab-angle: 6deg;
+}
+
+.folder-local {
+  background-image: url("../assets-img/folders/folder-local.png");
+  left: 2.9%;
+  top: 6.3%;
+  width: 88.75%;
+  aspect-ratio: 852 / 741;
+  z-index: 2;
+  --tab-x: 63.8%;
+  --tab-y: 9.7%;
+  --tab-angle: -16deg;
+}
+
+.folder-analytics {
+  background-image: url("../assets-img/folders/folder-analytics.png");
+  left: 5.9%;
+  top: 10.4%;
+  width: 80.6%;
+  aspect-ratio: 774 / 598;
+  z-index: 1;
+  --tab-x: 23.6%;
+  --tab-y: 6.7%;
+  --tab-angle: -4deg;
 }
