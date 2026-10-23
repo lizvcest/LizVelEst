@@ -6,10 +6,12 @@
   src: url("../assets-fonts/dripdrop-altsolid.woff2") format("woff2");
 }
 
-/* Page: removes the browser's default margin */
+/* Page: removes the browser's default margin and sets the body text font.
+   Kalam is inherited by all text; titles switch to DripDrop in their own rules */
 body {
   margin: 0;
   min-height: 100vh;
+  font-family: "Kalam", cursive;
 }
 
 /* ========== HEADER ========== */
@@ -31,13 +33,13 @@ header {
   align-items: center;
   font-family: "DripDrop Alt Solid";
   font-size: 90px;
-  color: #464c4f;
+  color: #18191a;
   text-transform: uppercase;
 }
 
 /* Home: white outline outside the letters */
 #home h1 {
-  -webkit-text-stroke: 4px white;
+  -webkit-text-stroke: 5px white;
   paint-order: stroke fill;
 }
 
@@ -54,7 +56,6 @@ header {
 .nav-links,
 .about-button {
   border-radius: 999px;
-  font-family: "DripDrop Alt Solid";
   /* Liquid glass effect */
   background: rgba(187, 187, 188, 0.12);
   -webkit-backdrop-filter: blur(8px) saturate(150%);
@@ -83,13 +84,15 @@ header {
 .nav-links a,
 .about-button {
   text-decoration: none;
-  color: #464c4f;
+  color: #18191a;
   font-size: 25px;
 }
 
-/* About button: size and position */
+/* About button: size, position and font (the nav uses Kalam from body) */
 .about-button {
+  font-family: "DripDrop Alt Solid";
   align-self: flex-start;
+  margin-top: 30px;
   padding: 15px 30px;
   text-align: center;
 }
@@ -162,7 +165,7 @@ header {
 /* Text column: star on top, paragraphs at the bottom */
 .about-content {
   /* Decorative star */
-  background: url("../assets-img/sparkle24.svg") 60% 10% / 40% no-repeat;
+  background: url("../assets-img/sparkle24.svg") 60% 5% / 40% no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -171,7 +174,6 @@ header {
 
 /* Text column: paragraphs */
 .about-content p {
-  font-family: "Marker Felt", cursive;
   text-transform: uppercase;
   font-size: 20px;
   line-height: 1.3;
@@ -205,7 +207,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 150px;
+  gap: 100px;
   padding: 50px;
 }
 
@@ -222,11 +224,10 @@ header {
 
 /* Card: white note */
 .skills-card {
-  font-family: "Marker Felt", cursive;
   background: white;
   border-radius: 30px;
   width: 100%;
-  max-width: 450px;
+  max-width: 500px;
   aspect-ratio: 1/1;
   padding: 40px;
   box-sizing: border-box;
@@ -268,6 +269,7 @@ header {
   position: absolute;
   background: center / contain no-repeat;
   cursor: pointer;
+  transition: scale 0.25s ease;
 }
 
 /* Radio: hidden from view but still usable with the keyboard */
@@ -316,9 +318,7 @@ header {
   color: #17191b;
 }
 
-/* Each folder: image, position, size and stacking order (001 in front).
-   aspect-ratio = the PNG's size in pixels, so the image is not distorted.
-   --tab-x, --tab-y and --tab-angle place the tab label (used in .folder-tab) */
+/* Each folder: image, position, size and stacking order */
 .folder-social {
   background-image: url("../assets-img/folders/folder-social.png");
   left: 1.9%;
@@ -343,8 +343,8 @@ header {
   --tab-angle: -17deg;
 }
 
-.folder-content {
-  background-image: url("../assets-img/folders/folder-content.png");
+.folder-web {
+  background-image: url("../assets-img/folders/folder-web.png");
   left: 2.1%;
   top: 27.4%;
   width: 80.4%;
@@ -389,4 +389,183 @@ header {
   --tab-x: 23.6%;
   --tab-y: 6.7%;
   --tab-angle: -4deg;
+}
+
+/* ---------- Skills interaction: choosing a folder ---------- */
+/* Each folder holds a hidden radio. Clicking the folder checks its radio, and
+   :checked + :has() let CSS react to which one is checked. All radios share
+   name="skills", so only one can be checked at a time. */
+
+/* Click area: each folder is a rectangle, and the transparent corners of the
+   folders on top were blocking clicks on the tabs below them (003 and 006).
+   So the folders ignore the mouse, and only the tabs react to it. 001 stays
+   fully clickable because it is in front and nothing covers it */
+.folder {
+  pointer-events: none;
+}
+
+.folder-social,
+.folder-tab {
+  pointer-events: auto;
+}
+
+/* Tab: padding makes the clickable area bigger than the text itself */
+.folder-tab {
+  padding: 0.6em 1em;
+}
+
+/* Folder: slightly bigger on mouse hover, as a hint that it can be clicked */
+.folder:hover {
+  scale: 1.04;
+}
+
+/* Folder: the chosen one keeps the hover size, so it stays marked.
+   It does not change its z-index, so it never covers the other folders */
+.folder:has(input:checked) {
+  scale: 1.04;
+}
+
+/* Card: all panels hidden until a folder is chosen */
+.skills-panel {
+  display: none;
+}
+
+/* Card: the hint disappears as soon as any folder is chosen */
+#skills:has(input:checked) .skills-hint {
+  display: none;
+}
+
+/* Card: shows the panel that matches the checked radio's value.
+   #skills is used because it contains both the folders and the card */
+#skills:has(input[value="social"]:checked) .panel-social,
+#skills:has(input[value="paid"]:checked) .panel-paid,
+#skills:has(input[value="web"]:checked) .panel-web,
+#skills:has(input[value="leads"]:checked) .panel-leads,
+#skills:has(input[value="local"]:checked) .panel-local,
+#skills:has(input[value="analytics"]:checked) .panel-analytics {
+  display: block;
+}
+
+/* ========== MOBILE (screens up to 768px wide) ========== */
+
+/* Everything inside @media only applies when the screen is 768px wide or less
+   (phones and small tablets). These rules override the desktop rules above
+   because they come later in the file. */
+@media (max-width: 768px) {
+  /* Header: less space around the nav */
+  header {
+    padding: 20px 16px;
+  }
+
+  /* Nav: smaller pill so the four links fit on one line */
+  .nav-links {
+    padding: 10px 20px;
+    gap: 18px;
+  }
+
+  /* Nav: smaller link text, and "About me" never splits into two lines */
+  .nav-links a {
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  /* Home: shorter hero */
+  #home {
+    min-height: 80vh;
+  }
+
+  /* Home: title size follows the screen width (14vw = 14% of it),
+     with a thinner outline in proportion */
+  #home h1 {
+    font-size: 14vw;
+    -webkit-text-stroke: 3px white;
+  }
+
+  /* About: columns stacked one on top of the other */
+  #about {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  /* About: each column takes the height of its content instead of sharing the screen */
+  .about-title,
+  .about-content {
+    flex: none;
+  }
+
+  /* Title column: shorter block, title centered */
+  .about-title {
+    min-height: 45vh;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  /* Title column: horizontal text again, sized to the screen width.
+     position: relative keeps it above the blurred ::before layer
+     (on desktop the transform did that job) */
+  .about-title h2 {
+    position: relative;
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 22vw;
+    line-height: 0.9;
+  }
+
+  /* Text column: smaller star centered at the top; padding-top leaves room for it */
+  .about-content {
+    background-size: 110px;
+    background-position: center 24px;
+    padding: 160px 24px 48px;
+  }
+
+  /* Text column: slightly smaller paragraphs */
+  .about-content p {
+    font-size: 17px;
+  }
+
+  /* About button: smaller text */
+  .about-button {
+    font-size: 18px;
+  }
+
+  /* Skills: one column. Order on mobile: heading, folders, card */
+  #skills {
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    min-height: auto;
+    padding: 40px 16px 60px;
+  }
+
+  /* Left column: display: contents removes its box, so the heading and the card
+     become direct children of #skills and can be placed around the folders with order */
+  .skills-intro {
+    display: contents;
+  }
+
+  /* Heading: first, smaller */
+  .skills-intro h2 {
+    order: 1;
+    font-size: 34px;
+  }
+
+  /* Folders: second, full width, right above the card that changes when one is tapped */
+  .skills-folders {
+    order: 2;
+    flex: none;
+    width: 100%;
+    padding: 0;
+  }
+
+  /* Folder tabs: bigger text so it stays readable on a small stack */
+  .folder-tab {
+    font-size: 3cqw;
+  }
+
+  /* Card: third; its height follows the text instead of being a fixed square */
+  .skills-card {
+    order: 3;
+    aspect-ratio: auto;
+    padding: 32px 24px;
+  }
 }

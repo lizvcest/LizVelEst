@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lizbeth's Portfolio</title>
+    <!-- Google Fonts: Kalam, used for body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="assets/assets-css/style.css" />
   </head>
   <body>
@@ -36,11 +43,11 @@
             worked.
           </p>
           <p>
-            Over the past [X] years I’ve managed campaigns for [X] clients
-            across [industries, e.g. software, education, real estate]. I handle
-            the whole cycle: planning the strategy, building campaigns in Google
-            Ads and Meta, setting up conversion tracking, and automating lead
-            flows into the CRM so no lead gets lost.
+            Over the past 8 years I’ve managed campaigns for many clients across
+            [industries, e.g. software, education, real estate]. I handle the
+            whole cycle: planning the strategy, building campaigns in Google Ads
+            and Meta, setting up conversion tracking, and automating lead flows
+            into the CRM so no lead gets lost.
           </p>
           <p>
             Some results I’m proud of: [e.g. reduced cost per lead by X% for a
@@ -62,6 +69,7 @@
           <h2>What’s inside?<br />Six areas I work in</h2>
           <div class="skills-card">
             <p class="skills-hint">Click a folder to see what’s inside.</p>
+            <!-- Panel 001: Social media (shown when its folder is chosen) -->
             <div class="skills-panel panel-social">
               <h3>Social media</h3>
               <p>
@@ -84,6 +92,63 @@
                 </li>
               </ul>
             </div>
+            <!-- Panel 002: Paid media -->
+            <div class="skills-panel panel-paid">
+              <h3>Paid media</h3>
+              <p>
+                Meta, LinkedIn and Google Ads campaigns built around one goal
+                each: leads, bookings, traffic or sales.
+              </p>
+              <p>Tools: Meta Ads, LinkedIn Ads, Google Ads.</p>
+              <p>
+                Result: LinkedIn Ads for StormWind driving demo bookings: [X
+                demos at $X per booking].
+              </p>
+            </div>
+            <!-- Panel 003: Web & landing pages -->
+            <div class="skills-panel panel-web">
+              <h3>Web &amp; landing pages</h3>
+              <p>
+                I don’t just plan the campaign, I build the page it lands on.
+              </p>
+              <p>Tools: Elementor Pro, Nuxt, Vue, Sanity, HTML/CSS, Git.</p>
+              <p>
+                Result: Built
+                <a href="https://conservatoriosa.com" target="_blank" rel="noopener noreferrer">conservatoriosa.com</a>
+                and
+                <a href="https://calasol.com" target="_blank" rel="noopener noreferrer">calasol.com</a>.
+                Here the proof is the site itself.
+              </p>
+            </div>
+            <!-- Panel 004: Lead generation -->
+            <div class="skills-panel panel-leads">
+              <h3>Lead generation</h3>
+              <p>
+                Funnels that bring qualified leads, not just volume, with
+                automations so no lead gets lost.
+              </p>
+              <p>Tools: Zoho CRM, Brevo, Zapier, Meta Instant Forms.</p>
+            </div>
+            <!-- Panel 005: Local growth -->
+            <div class="skills-panel panel-local">
+              <h3>Local growth</h3>
+              <p>
+                Campaigns that bring people through the door: reservations,
+                visits and foot traffic.
+              </p>
+              <p>Tools: Meta Ads geo-targeting.</p>
+            </div>
+            <!-- Panel 006: Analytics -->
+            <div class="skills-panel panel-analytics">
+              <h3>Analytics</h3>
+              <p>
+                Tracking set up right from day one, and reports that turn data
+                into decisions.
+              </p>
+              <p>
+                Tools: Google Analytics, platform reporting and Looker Studio.
+              </p>
+            </div>
           </div>
         </div>
         <div class="skills-folders">
@@ -99,9 +164,9 @@
               <input type="radio" name="skills" value="paid" />
               <span class="folder-tab">002 — Paid media</span>
             </label>
-            <label class="folder folder-content">
-              <input type="radio" name="skills" value="content" />
-              <span class="folder-tab">003 — Content</span>
+            <label class="folder folder-web">
+              <input type="radio" name="skills" value="web" />
+              <span class="folder-tab">003 — Web &amp; landing pages</span>
             </label>
             <label class="folder folder-leads">
               <input type="radio" name="skills" value="leads" />
