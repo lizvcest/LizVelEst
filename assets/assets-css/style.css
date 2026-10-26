@@ -16,8 +16,12 @@ body {
 
 /* ========== HEADER ========== */
 
-/* Header: background with blue blobs */
+/* Header: background with blue blobs.
+   position: relative is the reference for the teddy bears;
+   overflow: hidden cuts the parts of the bears that go past the edges */
 header {
+  position: relative;
+  overflow: hidden;
   padding: 40px 0;
   background:
     radial-gradient(circle at 10% 20%, #b2cbde, transparent 40%),
@@ -25,8 +29,40 @@ header {
     hsl(49, 30%, 90%);
 }
 
-/* Home: hero title */
+/* Teddy bears: shared settings for both decorative bears.
+   They are pseudo-elements because they are decoration, not content,
+   and a background image cannot be rotated on its own */
+header::before,
+header::after {
+  content: "";
+  position: absolute;
+  aspect-ratio: 547 / 560;
+  background: url("../assets-img/teddy-bear.png") center / contain no-repeat;
+  pointer-events: none;
+}
+
+/* Teddy bear 1: bottom left, sitting on the line where the next section
+   (About me) starts. bottom: -1vw lets it touch that line; the tiny part
+   that goes past it is cut by the header's overflow: hidden */
+header::before {
+  left: 1vw;
+  bottom: -1vw;
+  width: 27vw;
+  rotate: -4deg;
+}
+
+/* Teddy bear 2: top right, upside down and partly outside the page */
+header::after {
+  top: -6vw;
+  right: -4vw;
+  width: 23vw;
+  rotate: 160deg;
+}
+
+/* Home: hero title. position + z-index keep it above the teddy bears */
 #home {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -52,9 +88,10 @@ header {
   gap: 70px;
 }
 
-/* Glass style: shared by nav and About button */
+/* Glass style: shared by nav, About button and Contact submit button */
 .nav-links,
-.about-button {
+.about-button,
+.contact-submit {
   border-radius: 999px;
   /* Liquid glass effect */
   background: rgba(187, 187, 188, 0.12);
@@ -74,18 +111,26 @@ header {
     0 6px 16px 0 rgba(0, 0, 0, 0.08);
 }
 
-/* Nav: centers the pill */
+/* Nav: centers the pill. position + z-index keep it above the teddy bears */
 .navbar {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
 }
 
-/* Link text: nav and About button */
+/* Link text: nav, About button and Contact submit button */
 .nav-links a,
-.about-button {
+.about-button,
+.contact-submit {
   text-decoration: none;
   color: #18191a;
   font-size: 25px;
+}
+
+/* Nav: link text a bit bigger than the About button */
+.nav-links a {
+  font-size: 29px;
 }
 
 /* About button: size, position and font (the nav uses Kalam from body) */
@@ -446,6 +491,136 @@ header {
   display: block;
 }
 
+/* ========== CONTACT ========== */
+
+/* Section: title on top, phone and form side by side below it.
+   flex-wrap lets the title take a full line of its own */
+#contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /* Keeps the title and the content together in the middle, instead of
+     spreading the two lines across the whole height */
+  align-content: center;
+  gap: 40px 14vw;
+  min-height: 100vh;
+  padding: 50px 6vw 70px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 8% 12%, #b2cbde, transparent 35%),
+    radial-gradient(circle at 95% 70%, #b2cbde, transparent 40%),
+    hsl(49, 30%, 90%);
+}
+
+/* Title: flex-basis 100% fills the whole first line, so the phone and
+   the form wrap onto the line below */
+#contact h2 {
+  flex-basis: 100%;
+  margin: 0;
+  font-family: "DripDrop Alt Solid";
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 120px;
+  letter-spacing: 0.05em;
+  color: #17191b;
+}
+
+/* Phone: decorative image; height auto keeps its proportions */
+.contact-phone {
+  width: min(30vw, 420px);
+  height: auto;
+}
+
+/* Form: fields stacked in a column */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+  max-width: 480px;
+}
+
+/* Name group: removes the browser's default fieldset border and spacing,
+   and puts first and last name side by side */
+.form-name {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 40px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Name group title */
+.form-name legend {
+  padding: 0;
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+/* Field: label above its input */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* First and last name share the line equally; min-width makes them
+   stack when there is no room */
+.form-name .form-field {
+  flex: 1;
+  min-width: 150px;
+}
+
+/* Field label: small uppercase text, like the design */
+.form-field label {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Inputs: only a bottom line, like the design.
+   font: inherit makes them use Kalam (form fields do not inherit fonts by default) */
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font: inherit;
+  color: #18191a;
+  padding: 6px 0;
+  border: 0;
+  border-bottom: 2px solid #18191a;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* Textarea: can only be resized taller, not wider */
+.form-field textarea {
+  resize: vertical;
+}
+
+/* Inputs: visible focus, a blue line instead of the browser's outline */
+.form-field input:focus-visible,
+.form-field select:focus-visible,
+.form-field textarea:focus-visible {
+  outline: none;
+  border-bottom-color: #5b84a8;
+  box-shadow: 0 2px 0 #5b84a8;
+}
+
+/* Submit button: glass pill (shared rule above), aligned left */
+.contact-submit {
+  align-self: flex-start;
+  padding: 10px 36px;
+  border: 0;
+  font-family: "DripDrop Alt Solid";
+  font-size: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 /* ========== MOBILE (screens up to 768px wide) ========== */
 
 /* Everything inside @media only applies when the screen is 768px wide or less
@@ -465,13 +640,26 @@ header {
 
   /* Nav: smaller link text, and "About me" never splits into two lines */
   .nav-links a {
-    font-size: 16px;
+    font-size: 17px;
     white-space: nowrap;
   }
 
   /* Home: shorter hero */
   #home {
     min-height: 80vh;
+  }
+
+  /* Teddy bear 1: bigger in proportion to the narrow screen */
+  header::before {
+    bottom: -4vw;
+    width: 45vw;
+  }
+
+  /* Teddy bear 2: in the top corner, behind the glass nav, away from the title */
+  header::after {
+    top: 4vw;
+    right: -10vw;
+    width: 36vw;
   }
 
   /* Home: title size follows the screen width (14vw = 14% of it),
@@ -567,5 +755,22 @@ header {
     order: 3;
     aspect-ratio: auto;
     padding: 32px 24px;
+  }
+
+  /* Contact: one column, smaller title, smaller phone */
+  #contact {
+    flex-direction: column;
+    gap: 32px;
+    min-height: auto;
+    padding: 40px 16px 60px;
+  }
+
+  /* Title: small enough to keep CONTACT ME on one line */
+  #contact h2 {
+    font-size: 12vw;
+  }
+
+  .contact-phone {
+    width: 55vw;
   }
 }
